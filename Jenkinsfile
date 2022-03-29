@@ -8,7 +8,7 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-         stage('DeployToStaging') {
+        stage('DeployToStaging') {
             when {
                 branch 'master'
             }
@@ -37,6 +37,11 @@ pipeline {
                     )
                 }
             }
+        }
+        stage('DeployToProduction') {
+            when {
+                branch 'master'
+            }
             steps {
                 input 'Does the staging environment look OK?'
                 milestone(1)
@@ -63,7 +68,7 @@ pipeline {
                         ]
                     )
                 }
-            }        
-         }
+            }
+        }
     }
 }
